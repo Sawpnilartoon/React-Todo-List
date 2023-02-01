@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif;
+}
+
+body {
+  background-image: url("./pexels-steve-johnson-15049825.jpg  ");
+  overflow: hidden;
+}
+
+.maincontainer {
+  max-width: 440px;
+  padding: 0 20px;
+  margin: 170px auto;
+}
+.maincontainer .main {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-top: 250px;
+  display: none;
+  position: absolute;
+  overflow: auto;
+  width: 40%;
+}
+.maincontainer .main .title {
+  line-height: 80px;
+  background-color: #413c3c;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+}
+.maincontainer .main form {
+  padding: 30px 20px 25px 20px;
+}
+.maincontainer .main form .row {
+  height: 40px;
+  margin-bottom: 25px;
+  position: relative;
+}
+.maincontainer .main form .row input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 10px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  font-size: 16px;
+}
+.maincontainer .main form .row .Error-Span {
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+  color: red;
+  display: none;
+}
+.maincontainer .main form .button input {
+  color: #fff;
+  font-size: 18px;
+  padding-left: 0px;
+  background: #413c3c;
+  border: 1px solid #ede7e1;
+  cursor: pointer;
+}
+.maincontainer .main form .button input:hover {
+  background: #b97e44;
+}
+.maincontainer .main form .signup-Link {
+  text-align: center;
+  margin-top: 20px;
+}
+.maincontainer .main form .signup-Link a {
+  color: #413c3c;
+  font-size: 18px;
+  text-decoration: none;
+}
+.maincontainer .main form .signup-Link a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    background-image: url("./pexels-steve-johnson-15049825.jpg  ");
+    overflow: hidden;
+  }
+  .maincontainer {
+    max-width: 1000px;
+    padding: 0 20px;
+    margin: 170px auto;
+  }
+}/*# sourceMappingURL=Style.css.map */
