@@ -29,7 +29,7 @@ export default function Todo() {
     }
 
 
-    // Main Array Of Object  State ||UserName||FName||LName Array Of Object
+    // Main Array Of Object  State ||UserName||Name||Task Array Of Object
 
     const [TodoData, SetTodoData] = useState(GetDataFromLS());
     
@@ -39,15 +39,15 @@ export default function Todo() {
 
 
     // Inpute Fild State Start
-    const [UserName, SetUserName] = useState('');
-    const [FName, SetFName] = useState('');
-    const [LName, SetLName] = useState('');
+    // const [UserName, SetUserName] = useState('');
+    const [Name, SetName] = useState('');
+    const [Task, SetTask] = useState('');
     // Inpute Fild State End
 
 
     // Validation Error Sate
-    const [fnameBlankError, SetfnameBlankError] = useState();
-    const [LNameBlankError, SetLNameBlankError] = useState();
+    const [NameBlankError, SetNameBlankError] = useState();
+    const [TaskBlankError, SetTaskBlankError] = useState();
     const [EmailBlankError, SetEmailBlankError] = useState();
 
 
@@ -59,14 +59,14 @@ export default function Todo() {
 
         // Form VAlidation Start
 
-        if (e.target.UserName.value === "") {
-            SetfnameBlankError("*Enter Your User Name")
+        // if (e.target.UserName.value === "") {
+        //     SetNameBlankError("*Enter Your User Name")
 
-        }
+        // }
 
 
         if (e.target.FirstName.value === "") {
-            SetLNameBlankError("*Enter Your First Name")
+            SetTaskBlankError("*Enter Your First Name")
 
         }
 
@@ -77,17 +77,17 @@ export default function Todo() {
 
 
         let Todo = {
-            UserName,
-            FName,
-            LName
+            UserName:localStorage.getItem("Login_Emial"),
+            Name,
+            Task
         }
         // Push Data In main Array TodoData in Todo Object 
         SetTodoData([...TodoData, Todo]);
 
         // After Submite Data Blank Inpute Fild
-        SetUserName('');
-        SetFName('');
-        SetLName('');
+        // SetUserName('');
+        SetName('');
+        SetTask('');
 
         ClosPopForm()
 
@@ -96,23 +96,23 @@ export default function Todo() {
 // VAlidatio OnChange
 const UserOnChaneValidation = (event) => {
     if (event.target.value === "") {
-        SetfnameBlankError("*Enter Your User Name")
+        SetNameBlankError("*Enter Your User Name")
     }
     else {
-        SetfnameBlankError('')
+        SetNameBlankError('')
     }
 }
 
-const FNameOnChaneValidation = (event) => {
+const NameOnChaneValidation = (event) => {
     if (event.target.value === "") {
-        SetLNameBlankError("*Enter Your First Name")
+        SetTaskBlankError("*Enter Your First Name")
     }
     else {
-        SetLNameBlankError("")
+        SetTaskBlankError("")
     }
 }
 
-const LnameeOnChaneValidation = (event) => {
+const TaskeOnChaneValidation = (event) => {
     if (event.target.value === "") {
         SetEmailBlankError("*Enter Your Last Name")
     }
@@ -139,9 +139,9 @@ const LnameeOnChaneValidation = (event) => {
 
        SetUpdateBtn("Update")
        SetTitle("Edite List")
-        SetUserName(Todo.UserName)
-        SetFName(Todo.FName)
-        SetLName(Todo.LName)
+        // SetUserName(Todo.UserName)
+        SetName(Todo.Name)
+        SetTask(Todo.Task)
         PopShow();
    }
 
@@ -179,21 +179,21 @@ const EditeDilet=(id)=>{
                         onSubmit={handleAddTodoData}
                     >
 
-                        <div className="form-group row" >
+                       {/*<div className="form-group row" >
                             <input type="text" placeholder="Enter UserName" id="UserName" value={UserName}
                                 onChange={(e) => {SetUserName(e.target.value);UserOnChaneValidation(e)}} />
-                                <span style={{ color: "red" }}>{fnameBlankError}</span>
+                                <span style={{ color: "red" }}>{NameBlankError}</span>
+                        </div>*/}
+
+                        <div className="form-group row" >
+                            <input type="text" placeholder="Enter Name" id="FirstName" value={Name}
+                                onChange={(e) => {SetName(e.target.value);NameOnChaneValidation(e)}} />
+                                <span style={{ color: "red" }}>{TaskBlankError}</span>
                         </div>
 
                         <div className="form-group row" >
-                            <input type="text" placeholder="Enter First Name" id="FirstName" value={FName}
-                                onChange={(e) => {SetFName(e.target.value);FNameOnChaneValidation(e)}} />
-                                <span style={{ color: "red" }}>{LNameBlankError}</span>
-                        </div>
-
-                        <div className="form-group row" >
-                            <input type="text" placeholder="Enter Last Name" id="LastName" value={LName}
-                                onChange={(e) => {SetLName(e.target.value);LnameeOnChaneValidation(e)}} />
+                            <input type="text" placeholder="Enter Task" id="LastName" value={Task}
+                                onChange={(e) => {SetTask(e.target.value);TaskeOnChaneValidation(e)}} />
 
                                 <span style={{ color: "red" }}>{EmailBlankError}</span>
                         </div>
@@ -230,8 +230,8 @@ const EditeDilet=(id)=>{
                                     <tr className='table-dark"'>
                                         <th scope="col">No.</th>
                                         <th scope="col">UserName</th>
-                                        <th scope="col">Fisrt name</th>
-                                        <th scope="col">Last name</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Task</th>
                                         <th scope="col">Delete</th>
                                         <th scope="col">Edite</th>
                                         <th scope='col'>  <div className="input-group mb-3" style={{ marginTop: '20%', marginLeft: '20%' }}>
@@ -243,12 +243,12 @@ const EditeDilet=(id)=>{
                                 </thead>
 
                                 <tbody>
-                                    {TodoData.map((Todo, id) => (
+                                    {TodoData.filter(Todo=>Todo.UserName === localStorage.getItem("Login_Emial")).map((Todo, id) => (
                                         <tr key={id }>
                                             <td>{id }</td>
                                             <td>{Todo.UserName}</td>
-                                            <td>{Todo.FName}</td>
-                                            <td>{Todo.LName}</td>
+                                            <td>{Todo.Name}</td>
+                                            <td>{Todo.Task}</td>
                                             <td>
                                                 <button type="button" className="btn btn-danger" onClick={() => DeleteTodoData(id)}>Delete</button>
                                             </td>
@@ -263,13 +263,14 @@ const EditeDilet=(id)=>{
                                 </tbody>
 
                                 {/*All List Delete Button And Fuction Start*/}
-                                {
-                                    TodoData.length > 0 &&
+                                
+                                
+                               {/*{  TodoData.length > 0 &&
                                     <div className="input-group mb-3" style={{ marginTop: '5%', display: 'flex', justifySelf: 'center', marginLeft: '200%' }}>
                                     <button className="btn text-white btn-danger " onClick={() => { SetTodoData([]) }} type="button" id="button" >Remove All Data</button>
                                     
                                     </div>
-                                }
+                                }*/}
 
                             </table>
 
@@ -279,8 +280,8 @@ const EditeDilet=(id)=>{
 
 
                             {/*Show Mass No Task Start */}
-                            {TodoData.length < 1 &&
-                                <div style={{ color: 'white', paddingTop: '20px', padding: '0px 0px 20px 0px' }}>
+                            {TodoData.filter(Todo=>Todo.UserName === localStorage.getItem("Login_Emial"))>0 &&
+                                <div style={{ color: 'white', paddingTop: '20px',marginLeft:"40%" , padding: '0px 0px 20px 0px' }}>
                                     No Task....
                                 </div>}
                             {/*Show Mass No Task End */}
